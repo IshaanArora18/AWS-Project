@@ -55,8 +55,8 @@ def AddStu():
     stu_id = request.form['stu_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
+    branch = request.form['branch']
+    home = request.form['home']
     stu_image_file = request.files['stu_image_file']
 
     insert_sql = "INSERT INTO student VALUES (%s, %s, %s, %s, %s)"
@@ -67,7 +67,7 @@ def AddStu():
 
     try:
 
-        cursor.execute(insert_sql, (stu_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (stu_id, first_name, last_name, branch, home))
         db_conn.commit()
         stu_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
@@ -112,8 +112,8 @@ def UpdateStu():
     stu_id = request.form['stu_id']
     first_name = request.form['first_name']
     last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
+    branch = request.form['branch']
+    home = request.form['home']
 
     cursor = db_conn.cursor()
 
@@ -124,8 +124,8 @@ def UpdateStu():
 
         if existing_student:
             # Student with the same ID exists, update the record
-            update_sql = "UPDATE student SET first_name = %s, last_name = %s, pri_skill = %s, location = %s WHERE stu_id = %s"
-            cursor.execute(update_sql, (first_name, last_name, pri_skill, location, stu_id))
+            update_sql = "UPDATE student SET first_name = %s, last_name = %s, branch = %s, home = %s WHERE stu_id = %s"
+            cursor.execute(update_sql, (first_name, last_name, branch, home, stu_id))
             db_conn.commit()
 
             stu_name = f"{first_name} {last_name}"
