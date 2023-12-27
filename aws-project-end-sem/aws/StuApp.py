@@ -189,7 +189,7 @@ def DeleteStu():
             cursor.execute(delete_sql, (stu_id,))
             db_conn.commit()
 
-            return render_template('AddStuOutput.html', name=stu_id)
+            return render_template('deletestdoutput.html', name=stu_id)
         else:
             # flash("student id is not found", 'error')
             return render_template('delete.html', name=stu_id)
